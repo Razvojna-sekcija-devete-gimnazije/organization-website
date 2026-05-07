@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Engineering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="section">
+
+    <h1 class="section-title">Backend Engineering</h1>
+
+    <p class="section-subtitle">
+        Backend predstavlja serverski deo aplikacije koji obrađuje podatke,
+        upravlja korisnicima, komunicira sa bazom podataka i pruža API frontend aplikaciji.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Quarkus Framework</h3>
+
+            <p>
+                Quarkus je moderni Java framework optimizovan za cloud-native razvoj.
+                Fokusiran je na brz startup, malu potrošnju memorije i visoke performanse.
+            </p>
+
+            <div class="tag-container">
+                <span class="tag">RESTEasy Reactive</span>
+                <span class="tag">CDI</span>
+                <span class="tag">Hibernate ORM</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>PostgreSQL</h3>
+
+            <p>
+                Relaciona baza podataka koja služi za čuvanje svih podataka aplikacije:
+                korisnika, objava, sadržaja i administratorskih informacija.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>JWT Authentication</h3>
+
+            <p>
+                Sistem autentifikacije zasnovan na tokenima.
+                Omogućava siguran login korisnika i kontrolu pristupa različitim delovima sistema.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="code-block">
+<pre>
+POST /api/auth/login
+
+{
+    "email": "user@gmail.com",
+    "password": "password123"
+}
+</pre>
+    </div>
+
+</section>
+
+</body>
+</html>
