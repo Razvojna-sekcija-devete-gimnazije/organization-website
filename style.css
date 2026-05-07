@@ -404,3 +404,236 @@ footer {
         transform: rotate(-45deg) translate(6px, -6px);
     }
 }
+/* ========================= */
+/* MENTOR CARDS V2 */
+/* ========================= */
+
+.mentor-cards-wrapper {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
+    gap: 2rem;
+
+    margin-top: 4rem;
+}
+
+.mentor-card-v2 {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(15, 23, 42, 0.72);
+
+    border: 1px solid rgba(255,255,255,0.07);
+
+    border-radius: 32px;
+
+    backdrop-filter: blur(20px);
+
+    transition: 0.4s;
+
+    width: 100%;
+}
+
+.mentor-card-v2:hover {
+
+    transform: translateY(-10px);
+
+    border-color: rgba(99,102,241,0.4);
+
+    box-shadow: 0 30px 80px rgba(99,102,241,0.18);
+}
+
+.mentor-image-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 19/20;
+
+    overflow: hidden;
+}
+
+
+.mentor-image-wrapper img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center top;
+    transition: 0.5s;
+}
+
+.mentor-card-v2:hover img {
+
+    transform: scale(1.05);
+}
+
+.mentor-image-glow {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,6,23,0.95),
+            rgba(2,6,23,0.2),
+            transparent
+        );
+}
+
+.blue-glow {
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2,6,23,0.95),
+            rgba(30,41,59,0.2),
+            transparent
+        );
+}
+
+.mentor-info {
+
+    padding: 2.5rem;
+}
+
+.mentor-position {
+
+    display: inline-block;
+
+    margin-bottom: 1rem;
+
+    color: #a5b4fc;
+
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+.blue-position {
+
+    color: #93c5fd;
+}
+
+.mentor-info h3 {
+
+    font-size: 2rem;
+
+    margin-bottom: 1.2rem;
+
+    font-weight: 800;
+
+    letter-spacing: -0.03em;
+}
+
+.mentor-info p {
+
+    color: #94a3b8;
+
+    line-height: 1.9;
+
+    margin-bottom: 2rem;
+}
+
+@media(max-width: 1200px) {
+
+    .mentor-cards-wrapper {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 768px) {
+
+    .mentor-card-v2 {
+
+        border-radius: 24px;
+    }
+
+    .mentor-image-wrapper {
+
+        height: 280px;
+    }
+
+    .mentor-info {
+
+        padding: 2rem;
+    }
+
+    .mentor-info h3 {
+
+        font-size: 1.6rem;
+    }
+
+}
+
+.centered {
+
+    text-align: center;
+}
+
+.centered h3 {
+
+    margin: 0;
+
+    font-size: 1.8rem;
+}
+
+.mentor-description-box {
+
+    margin-top: 4rem;
+
+    padding: 3rem;
+
+    border-radius: 32px;
+
+    background: rgba(15, 23, 42, 0.72);
+
+    border: 1px solid rgba(255,255,255,0.07);
+
+    backdrop-filter: blur(20px);
+}
+
+.mentor-description-box h3 {
+
+    font-size: 2rem;
+
+    margin-bottom: 2rem;
+
+    font-weight: 800;
+}
+
+.mentor-description-box p {
+
+    color: #94a3b8;
+
+    line-height: 1.9;
+
+    margin-bottom: 1.7rem;
+
+    font-size: 1.03rem;
+}
+
+@media(max-width: 768px) {
+
+    .mentor-description-box {
+
+        padding: 2rem;
+    }
+
+}

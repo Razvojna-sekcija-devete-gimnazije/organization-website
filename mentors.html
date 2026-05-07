@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentori | Sekcija Računarstva</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo"> SEKCIJA<span>.DEV</span> </a>
+        <button class="menu-toggle" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+          <a href="index.html">Početna</a>
+          <a href="about.html">O sekciji</a>
+          <a href="roadmap.html">Roadmap</a>
+          <a href="backend.html">Backend</a>
+          <a href="frontend.html">Frontend</a>
+          <a href="devops.html">DevOps</a>
+          <a href="team.html">Tim</a>
+          <a href="mentors.html">Mentori</a>
+          <a href="join.html">Prijava</a>
+        </div>
+      </div>
+    </nav>
+    <section class="hero mentors-hero">
+      <div class="hero-content">
+        <span class="hero-badge"> SEKCIJA RAČUNARSTVA 2025/2026 </span>
+
+        <h1>
+          Mentori koji vode <span class="gradient">ceo razvojni proces</span>
+        </h1>
+
+        <p>
+          Sekcija funkcioniše kao simulacija pravog softverskog tima. Mentori
+          nisu samo predavači — već vode učenike kroz kompletan proces razvoja
+          modernih aplikacija, organizacije rada i profesionalnog software
+          engineering workflow-a.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Mentori Sekcije</h2>
+
+        <p class="section-subtitle">
+          Sekciju vode bivši učenici Devete beogradske gimnazije, danas studenti
+          prve godine Matematičkog fakulteta Univerziteta u Beogradu. Cilj
+          sekcije nije samo učenje pojedinačnih tehnologija, već upoznavanje
+          učenika sa kompletnim procesom razvoja modernih softverskih sistema
+          kroz praktičan rad na realnom projektu.
+        </p>
+      </div>
+
+      <!-- KARTICE -->
+
+      <div class="mentor-cards-wrapper">
+        <!-- MATIJA -->
+
+        <div class="mentor-card-v2">
+          <div class="mentor-image-wrapper">
+            <img src="images/matija.jpg" alt="Matija Marinković" />
+
+            <div class="mentor-image-glow"></div>
+          </div>
+
+          <div class="mentor-info centered">
+            <h3>Matija Marinković</h3>
+          </div>
+        </div>
+
+        <!-- JOVAN -->
+
+        <div class="mentor-card-v2">
+          <div class="mentor-image-wrapper">
+            <img src="images/jovan.jpg" alt="Jovan Stefanović" />
+
+            <div class="mentor-image-glow blue-glow"></div>
+          </div>
+
+          <div class="mentor-info centered">
+            <h3>Jovan Stefanović</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZAJEDNIČKI OPIS -->
+
+      <div class="mentor-description-box">
+        <h3>O mentorima i radu sekcije</h3>
+
+        <p>
+          Mentori sekcije su bivši učenici Devete beogradske gimnazije koji su
+          tokom školovanja učestvovali u projektima iz programiranja, razvoja
+          softvera i informacionih tehnologija, a danas nastavljaju obrazovanje
+          na Matematičkom fakultetu Univerziteta u Beogradu.
+        </p>
+
+        <p>
+          Sekcija je zamišljena kao simulacija pravog softverskog tima. Učenici
+          neće učiti samo sintaksu određenih programskih jezika i framework-a,
+          već će prolaziti kroz kompletan proces razvoja jedne moderne
+          aplikacije: planiranje sistema, organizaciju rada, dizajn arhitekture,
+          backend i frontend razvoj, rad sa bazama podataka, autentifikaciju
+          korisnika, deployment aplikacije, dokumentaciju i timsku kolaboraciju.
+        </p>
+
+        <p>
+          Fokus sekcije je na praktičnom radu i razumevanju načina na koji
+          nastaju realni softverski sistemi. Cilj je da učenici steknu iskustvo
+          rada u okruženju koje podseća na profesionalne razvojne timove,
+          koristeći moderne tehnologije i alate koji se danas primenjuju u
+          industriji.
+        </p>
+
+        <div class="tag-container">
+          <span class="tag">Software Engineering</span>
+          <span class="tag">Team Workflow</span>
+          <span class="tag">Git & GitHub</span>
+          <span class="tag">Quarkus</span>
+          <span class="tag">React</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Linux</span>
+          <span class="tag">REST API</span>
+          <span class="tag">DevOps</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Sekcija Računarstva • 2025/2026</p>
+
+      <p class="footer-small">Mentori: Matija Marinković & Jovan Stefanović</p>
+    </footer>
+
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+        });
+      });
+    </script>
+  </body>
+</html>
