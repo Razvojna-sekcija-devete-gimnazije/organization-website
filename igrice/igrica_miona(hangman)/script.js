@@ -54,7 +54,7 @@ for(let slovo of slovaD){
 		if(greske==6){
 			c.fillStyle = 'red';
 			c.font = "180px Arial";
-			c.fillText("ГУБИТНИЧЕ ЈЕДАН БРЕЕЕ!",300,150);
+			c.fillText("ПОРАЗ!",300,150);
 			gubi =true;
 		}
 		if(pogodjeno==rec.length){
