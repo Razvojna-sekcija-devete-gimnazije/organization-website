@@ -20,19 +20,24 @@ c.moveTo(80, 200);
 c.lineTo(120, 200);
 c.stroke();
 
-const rec = "ordinacijaordinacijaaaaaa";
+const rec = "žabac";
 c.font = "40px Arial";
 c.fillText("_ ".repeat(rec.length),200,200);
 let greske = 0;
-let gotovo = false;
+let pogodjeno = 0;
+let gubi = false;
+let pobedjuje = false;
 
 c.font = "30px Arial";
 let slovaD = ['a','b','v','g','d','đ','e','ž','z','i','j','k','l','lj','m','n','nj','o','p','r','s','t','ć','u','f','h','c','č','dž','š'];
 for(let slovo of slovaD){
 	let dugme = document.getElementById(slovo);
 	dugme.addEventListener("click", function(event){
-		if(gotovo) return;
-		
+		if(gubi || pobedjuje) return;
+		if (dugme.classList.contains("clicked")) return;
+
+		dugme.classList.add("clicked");
+
 		if(!rec.includes(slovo)){
 			greske++;
 			DeoTela(greske);
@@ -41,6 +46,7 @@ for(let slovo of slovaD){
 			for (let j = 0; j < rec.length; j++) {
 				if (rec[j] == slovo) {
 					c.fillText(slovo.toUpperCase(),200+33.4*j,200);
+					pogodjeno++;
 				}	
 			}
 		}
@@ -48,7 +54,13 @@ for(let slovo of slovaD){
 			c.fillStyle = 'red';
 			c.font = "180px Arial";
 			c.fillText("YOU LOSE!",300,150);
-			gotovo =true;
+			gubi =true;
+		}
+		if(pogodjeno==rec.length){
+			c.fillStyle = 'green';
+			c.font = "180px Arial";
+			c.fillText("POBEDA!",300,150);
+			pobedjuje = true;
 		}
 	});
 }

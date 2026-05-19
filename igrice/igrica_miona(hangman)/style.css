@@ -4,3 +4,7 @@ button{
 	font-size: 20px;
 	margin-left: 5px;
 }
+button.clicked{
+	background-color: #b30000;
+	color: rgb(99, 99, 99);
+}
