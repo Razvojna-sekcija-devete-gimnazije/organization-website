@@ -20,7 +20,8 @@ c.moveTo(80, 200);
 c.lineTo(120, 200);
 c.stroke();
 
-const rec = "жабац";
+const reci = ["компјутер","телефон","гитара","игрица","чичаглиша","столица","књига","слика","апарат","постер","фиока","планина","лишај","авокадо","путовање","авион"];
+const rec = reci[Math.floor(Math.random() * reci.length)];
 c.font = "40px Arial";
 c.fillText("_ ".repeat(rec.length),200,200);
 let greske = 0;
