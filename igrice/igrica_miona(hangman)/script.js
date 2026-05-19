@@ -20,7 +20,7 @@ c.moveTo(80, 200);
 c.lineTo(120, 200);
 c.stroke();
 
-const rec = "žabac";
+const rec = "жабац";
 c.font = "40px Arial";
 c.fillText("_ ".repeat(rec.length),200,200);
 let greske = 0;
@@ -29,7 +29,7 @@ let gubi = false;
 let pobedjuje = false;
 
 c.font = "30px Arial";
-let slovaD = ['a','b','v','g','d','đ','e','ž','z','i','j','k','l','lj','m','n','nj','o','p','r','s','t','ć','u','f','h','c','č','dž','š'];
+let slovaD = "абвгдђежзиијклљмнњопрстћуфхцчџш";
 for(let slovo of slovaD){
 	let dugme = document.getElementById(slovo);
 	dugme.addEventListener("click", function(event){
@@ -53,13 +53,13 @@ for(let slovo of slovaD){
 		if(greske==6){
 			c.fillStyle = 'red';
 			c.font = "180px Arial";
-			c.fillText("YOU LOSE!",300,150);
+			c.fillText("ГУБИТНИЧЕ ЈЕДАН БРЕЕЕ!",300,150);
 			gubi =true;
 		}
 		if(pogodjeno==rec.length){
 			c.fillStyle = 'green';
 			c.font = "180px Arial";
-			c.fillText("POBEDA!",300,150);
+			c.fillText("ПОБЕДА!",300,150);
 			pobedjuje = true;
 		}
 	});
