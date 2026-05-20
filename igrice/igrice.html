@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Učeničke Igrice | Sekcija Računarstva</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                SEKCIJA<span>.DEV</span>
+            </a>
+            <button class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Početna</a>
+                <a href="about.html">O sekciji</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="backend.html">Backend</a>
+                <a href="frontend.html">Frontend</a>
+                <a href="devops.html">DevOps</a>
+                <a href="team.html">Tim</a>
+                <a href="mentors.html">Mentori</a>
+                <a href="igrice.html">Igrice</a>
+                <a href="join.html">Prijava</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero games-hero">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                HTML • CSS • JavaScript
+            </span>
+
+            <h1>
+                Učeničke <span class="gradient">igrice</span>
+            </h1>
+
+            <p>
+                Ovde možete videti igrice koje su učenici pravili koristeći HTML,
+                CSS i JavaScript. Svaki učenik je dobio zadatak da samostalno osmisli,
+                dizajnira i implementira svoju igru.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- GAMES SECTION -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2 class="section-title">
+                Galerija Projekata
+            </h2>
+
+            <p class="section-subtitle">
+                Kartice se automatski generišu na osnovu foldera sa projektima.
+                Svaki folder predstavlja jednu igricu.
+            </p>
+
+        </div>
+
+        <div id="games-grid" class="games-grid"></div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            Sekcija Računarstva • 2025/2026
+        </p>
+
+    </footer>
+
+    <!-- NAVBAR SCRIPT -->
+
+    <script>
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+
+            });
+
+        });
+
+    </script>
+
+    <script src="igrice.js"></script>
+
+    <script>
+        const gamesGrid = document.getElementById('games-grid');
+        games.forEach(game => {
+            const card = document.createElement('a');
+            card.className = 'game-card';
+            card.href =
+                `igrice/${game.folder}/index.html`;
+            card.innerHTML = `
+                <div class="game-image-wrapper">
+                    <img
+                    src="./${game.folder}/thumbnail.png"
+                    alt="${game.title}"
+                    onerror="
+                        this.onerror=null;
+                        this.src='fallback.png';">
+                </div>
+                <div class="game-info">
+                    <h3>${game.title}</h3>
+                </div>`;
+            gamesGrid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
