@@ -4,7 +4,11 @@ button{
 	font-size: 20px;
 	margin-left: 5px;
 }
-button.clicked{
+button.pogresno{
 	background-color: #b30000;
+	color: rgb(99, 99, 99);
+}
+button.pogodjeno{
+	background-color: #00b300;
 	color: rgb(99, 99, 99);
 }

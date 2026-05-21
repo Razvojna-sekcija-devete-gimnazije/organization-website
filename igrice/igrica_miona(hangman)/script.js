@@ -201,25 +201,29 @@ for(let slovo of slovaD){
 		if(!rec.includes(slovo)){
 			greske++;
 			DeoTela(greske);
+			dugme.classList.add("pogresno");
 		}
 		else{
 			for (let j = 0; j < rec.length; j++) {
 				if (rec[j] == slovo) {
 					c.fillText(slovo.toUpperCase(),200+33.4*j,200);
 					pogodjeno++;
+					dugme.classList.add("pogodjeno");
 				}	
 			}
 		}
 		if(greske==6){
+			c.font = "bold 20px Arial";
+			c.fillText("реч је била: " + rec.toUpperCase(),300,150);
 			c.fillStyle = 'red';
-			c.font = "180px Arial";
-			c.fillText("ПОРАЗ!",300,150);
+			c.font = "130px Arial";
+			c.fillText("Упс, изгубио си!",300,120);
 			gubi =true;
 		}
 		if(pogodjeno==rec.length){
 			c.fillStyle = 'green';
-			c.font = "180px Arial";
-			c.fillText("ПОБЕДА!",300,150);
+			c.font = "130px Arial";
+			c.fillText("Свака част!",300,120);
 			pobedjuje = true;
 		}
 	});
