@@ -12,3 +12,20 @@ button.pogodjeno{
 	background-color: #00b300;
 	color: rgb(99, 99, 99);
 }
+header{
+	text-align: center;
+	font-family: 'Times New Roman', sans-serif;
+	background-color: #ca1e66;
+	color: white;
+	width: 100%;
+  	margin: 0;
+  	padding: 1px;
+}
+body{
+	background-color: #f189c993;
+	padding:0;
+	margin:0;
+}
+main{
+	margin-left: 8%;
+}
