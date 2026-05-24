@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dress up - najbolja igrica</title>
+   <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #ffe6f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;}
+           h1 {
+            color: #ff66b2;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+        .okvirigre {
+			display: flex;
+            background: #fffffffa; 
+            padding:30px;
+            border-radius: 15px; 
+            border: 2px solid #ffccd5;
+         }
+         .kockalutkice {
+            position: relative;
+            width: 400px; 
+            height: 600px; 
+            border: 1px solid #ffe6f2;}
+        .kockalutkice img {
+            position: absolute;
+			width: 100%;
+            height: 100%;}
+
+     
+        .meni {
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+            width: 270px;
+        }
+
+        .vrstaodece {
+            background: #fff8fa;
+            border: 1px solid #ffe6f0;
+        }
+        .vrstaodece h3 {
+          
+            color: #ff3399;
+            font-size: 13px; }
+        .gumpi {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        button {
+			font-family: 'Courier New', Courier, monospace;
+			color: #ff66b2;
+            background: #ffffff;
+            border: 1px solid #ff99cc;
+            padding: 10px 15px;
+            font-size: 12px;}
+
+        button:hover {
+            background: #ff99cc;
+            color: #ffffff;}
+
+        button:active {
+            box-shadow: 0 1px 0px #ff99cc;
+        }
+
+        button.skidaj {
+            border-color: #c5c5c5; color: #777777;
+            box-shadow: 0 1px 0px #c5c5c5;
+        }
+        button.skidaj:hover {
+            background: #b5b5b5;
+            color: #ffffff; 
+        }
+        button.skidaj:active {
+            box-shadow: 0 1px 0px #c5c5c5;
+        }
+        
+        button.reset {
+            flex: 1;
+            border-color: #ffb3b3;
+            color: #d95353;}
+        button.reset:hover {
+            background: #ffb3b3;
+            color: #ffffff;
+            }
+       
+       button.random {
+            flex: 1;
+            border-color: #d1b3ff;
+            color: #7b3dcc;}
+        button.random:hover {
+            background: #d1b3ff;
+            color: #ffffff;}
+    
+     
+      
+   </style>
+</head>
+<body>
+  
+    <h1>Dress To Impress 2.0</h1>
+    <div class="okvirigre">
+        <div class="kockalutkice">
+            <img src="lutka.png" id="lutka" alt="Lutka">
+            <img src="" id="jednodelni" alt="pukla veza">
+            <img src="" id="donjideo" alt="pukla veza">
+            <img src="" id="gornjideo" alt="pukla veza">
+            <img src="" id="aksesoari" alt="pukla veza">
+        </div>
+     <div class="meni">
+			<button class="reset" onclick="resetuj()">Reset</button>
+			<button class="random" onclick="randomm()">Random</button>
+			<div class="vrstaodece">
+                <h3>Jednodelna odeca</h3>
+                <div class="gumpi">
+                    <button onclick="obucise('jednodelni', 'jednodel1.png')">Sekta</button>
+                    <button onclick="obucise('jednodelni', 'jednodel4.png')">Roze Haljina</button>
+                    <button onclick="obucise('jednodelni', 'jednodel3.png')">Žuta Haljina</button>
+                    <button onclick="obucise('jednodelni', 'jednodel2.png')">Frenki</button>
+                    <button class="skidaj" onclick="obucise('jednodelni', '')">Skini</button>
+                </div>
+            </div>
+
+            <div class="vrstaodece">
+                <h3>Gornji delovi</h3>
+                <div class="gumpi">
+                    <button onclick="obucise('gornjideo', 'gornjideo2.png')">Zelena</button>
+                    <button onclick="obucise('gornjideo', 'gornjideo1.png')">Plava</button>
+                    <button onclick="obucise('gornjideo', 'gornjideo3.png')">Ljubičasta</button>
+                    <button class="skidaj" onclick="obucise('gornjideo', '')"> Skini</button>
+                </div>
+            </div>
+            <div class="vrstaodece">
+                <h3> Donji delovi</h3>
+                <div class="gumpi">
+                    <button onclick="obucise('donjideo', 'suknja1.png')">Teksas Suknja</button>
+                    <button onclick="obucise('donjideo', 'pantalone2.png')">Tamne</button>
+                    <button onclick="obucise('donjideo', 'pantalone3.png')">Plavo Krzno</button>
+                    <button class="skidaj" onclick="obucise('donjideo', '')">Skini</button>
+                </div>
+            </div>
+            <div class="vrstaodece">
+                <h3> Aksesoari</h3>
+                <div class="gumpi">
+                    <button onclick="obucise('aksesoari', 'aksesoar2.png')">Kuribo </button>
+                    <button onclick="obucise('aksesoari', 'aksesoar3.png')">Naočare</button>
+                    <button onclick="obucise('aksesoari', 'aksesoari1.png')">Kravata</button>
+                    <button class="skidaj" onclick="obucise('aksesoari', '')">Skini</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const opcije = {
+            jednodelni:['jednodel1.png', 'jednodel4.png', 'jednodel3.png', 'jednodel2.png'],
+            gornjideo:['gornjideo2.png', 'gornjideo1.png', 'gornjideo3.png'],
+            donjideo:['suknja1.png', 'pantalone2.png', 'pantalone3.png'],
+            aksesoari:['aksesoar2.png', 'aksesoar3.png', 'aksesoari1.png']};
+         function obucise(vrstaodece, predmet) 
+         {const novisloj = document.getElementById(vrstaodece);
+            if (predmet==='') {
+                novisloj.src='';
+                novisloj.alt='';}
+            else 
+            {novisloj.src=predmet;
+                novisloj.alt=vrstaodece;}
+             if (vrstaodece==='jednodelni' && predmet!=='') {
+                document.getElementById('gornjideo').src='';
+                document.getElementById('donjideo').src='';
+            }
+            if ((vrstaodece==='gornjideo' || vrstaodece==='donjideo') && predmet!=='') {
+                document.getElementById('jednodelni').src='';
+            }
+        }
+
+        function resetuj() {
+            const deo=['jednodelni','donjideo','gornjideo','aksesoari'];
+            for (const i of deo) 
+            {
+                const k=document.getElementById(i);
+                k.src='';
+                k.alt='';
+            }
+        }
+
+        function randomm() {
+            resetuj();
+			/*baca se novic-nemam pametnije resenje*/
+            const novcic=Math.random();/*bira da li se nosi jednodel ili dvodel*/
+                if (novcic<0.5) {
+                const halj=opcije.jednodelni[Math.floor(Math.random() *opcije.jednodelni.length)];
+                obucise('jednodelni', halj);
+            } else {
+                const gornj=opcije.gornjideo[Math.floor(Math.random()* opcije.gornjideo.length)];
+                const donj=opcije.donjideo[Math.floor(Math.random()* opcije.donjideo.length)];
+                obucise('gornjideo', gornj);
+                obucise('donjideo', donj);
+            }
+			const novicaksesoari=Math.random();
+            if (novicaksesoari<0.5)
+			{
+                const aks=opcije.aksesoari[Math.floor(Math.random*opcije.aksesoari.length)];
+                obucise('aksesoari', aks);}
+        
+           }   </script>
+</body>
+</html>
