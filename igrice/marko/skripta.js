@@ -1,7 +1,8 @@
 //Define HTML elements
 const board=document.getElementById('game-board');
 const instructions=document.getElementById('instruction-text');
-
+const score=document.getElementById('score');    
+const highscore=document.getElementById('highscore')
 
 //Define game variables
 let snake=[{x:10,y:10}];
@@ -10,7 +11,7 @@ let direction='right';
 let gameInterval;
 let gameSpeed=200;
 let gameStarted=false;
-
+let gameEnded=false;
 //Draw game map,snake,food
 function draw(){
     board.innerHTML='';
@@ -51,6 +52,9 @@ function drawFood(){
 function generateFood(){
     const x=Math.floor(Math.random()*20)+1;
     const y=Math.floor(Math.random()*20)+1;
+    if(snake.some(segment=>segment.x===x && segment.y===y)){
+        return generateFood();
+    }
     return{x,y};
 }
 
@@ -73,15 +77,18 @@ function moveSnake(){
     }
     snake.unshift(head);
     if(head.x==food.x && head.y==food.y){
+        updateScore();
         food=generateFood();
+        decreaseSpeed();
         clearInterval(gameInterval);
         gameInterval=setInterval(()=>{
             moveSnake();
-            //checkCollision();
+            checkCollision();
             draw();
         },gameSpeed);
     }
     else snake.pop();
+
 }
 
 //start game
@@ -90,15 +97,25 @@ function startGame(){
     instructions.style.display='none';
     gameInterval=setInterval(()=>{
         moveSnake();
-        //checkCollision();
+        checkCollision();
         draw();
     },gameSpeed)
 }
 
 //keypress event listener
 function handleKeyPress(event){
-    if((!gameStarted && event.code==='Space')||
-    (!gameStarted && event.key===' ') ) {startGame();}
+    if(((!gameStarted && event.code==='Space')||
+    (!gameStarted && event.key===' ') ) && gameEnded===false) {startGame();}
+    else if(((!gameStarted && event.code==='Space')||
+    (!gameStarted && event.key===' ') ) && gameEnded===true){
+        snake=[{x:10,y:10}];
+        food= generateFood();
+        direction='right';
+        gameSpeed=200;
+        gameEnded=false;
+        startGame();
+    }
+    
     else{
         switch(event.key){
             case'ArrowUp':
@@ -121,3 +138,54 @@ function handleKeyPress(event){
     }
 }
 document.addEventListener('keydown',handleKeyPress);
+
+function decreaseSpeed(){
+    console.log(gameSpeed);
+    if(gameSpeed>150){
+        gameSpeed-=5;
+    }
+    else if (gameSpeed>100){
+        gameSpeed-=3;
+    }
+    else if (gameSpeed>50){
+        gameSpeed-=2;
+    }
+    else if (gameSpeed>25){
+        gameSpeed-=1;
+    }
+}
+
+function checkCollision(){
+    const head=snake[0];
+
+    if(head.x<1 || head.x>20||head.y<1||head.y>20){
+        endGame();
+    }
+    for(let i=1;i<snake.length;i++){
+        if(head.x==snake[i].x&&head.y==snake[i].y){
+            endGame();
+        }
+    }
+}
+
+function endGame(){
+    updateHighScore();
+    clearInterval(gameInterval);
+    gameStarted=false;
+    instructions.textContent='Game Over! Press Space to restart.';
+    instructions.style.display='block';
+    gameEnded=true;
+}
+
+function updateScore(){
+    const currentScore=snake.length-1;
+    score.textContent=currentScore.toString().padStart(3,'0');
+}
+
+function updateHighScore(){
+    const currentScore=snake.length-1;
+    const highScoreValue=parseInt(highscore.textContent);
+    if(currentScore>highScoreValue){
+        highscore.textContent=currentScore.toString().padStart(3,'0');
+    }
+}
