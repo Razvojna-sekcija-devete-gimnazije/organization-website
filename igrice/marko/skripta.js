@@ -1,191 +1,152 @@
-//Define HTML elements
-const board=document.getElementById('game-board');
-const instructions=document.getElementById('instruction-text');
-const score=document.getElementById('score');    
-const highscore=document.getElementById('highscore')
+const tabla = document.getElementById('tabla');
+const instrukcija = document.getElementById('instrukcija');
+const score = document.getElementById('score');    
+const highscore = document.getElementById('highscore');
 
-//Define game variables
-let snake=[{x:10,y:10}];
-let food= generateFood();
-let direction='right';
-let gameInterval;
-let gameSpeed=200;
-let gameStarted=false;
-let gameEnded=false;
-//Draw game map,snake,food
-function draw(){
-    board.innerHTML='';
-    drawSnake();
-    drawFood();
+let zmija = [{ x: 10, y: 10 }];
+let hrana = generisiHranu();
+let smer = 'right';
+let intervalIgre;
+let brzina = 200;
+let igraPocela = false;
+let igraZavrsena = false;
+
+function Nacrtaj() {
+    tabla.innerHTML = '';
+    nacrtajZmiju();
+    nacrtajHranu(); 
 }
 
-//Draw snake
-function drawSnake(){
-    snake.forEach((segment)=>{
-        const snakeElement=createGameElement('div','snake');
-        setPosition(snakeElement,segment);
-        board.appendChild(snakeElement);
+function nacrtajZmiju() {
+    zmija.forEach((segment) => {
+        const snakeElement = napraviElement('div', 'zmija');
+        postaviPoziciju(snakeElement, segment);
+        tabla.appendChild(snakeElement);
     });
 }
 
-//Create a snake or food cubr/div
-function createGameElement(tag,className){
-    const element=document.createElement(tag);
-    element.className=className;
+function napraviElement(tag, className) {
+    const element = document.createElement(tag);
+    element.className = className;
     return element;
 }
 
-//Set position of snake or food
-function setPosition(element,position){
-    element.style.gridColumn=position.x;
-    element.style.gridRow=position.y;
+function postaviPoziciju(element, pozicija) {
+    element.style.gridColumn = pozicija.x;
+    element.style.gridRow = pozicija.y;
 }
 
-//drawFood
-function drawFood(){
-    const foodElement=createGameElement('div','food');
-    setPosition(foodElement,food);
-    board.appendChild(foodElement);
+function nacrtajHranu() {
+    const elementHrane = napraviElement('div', 'hrana');
+    postaviPoziciju(elementHrane, hrana);
+    tabla.appendChild(elementHrane);
 }
 
-//Generate food
-function generateFood(){
-    const x=Math.floor(Math.random()*20)+1;
-    const y=Math.floor(Math.random()*20)+1;
-    if(snake.some(segment=>segment.x===x && segment.y===y)){
-        return generateFood();
+function generisiHranu() {
+    const x = Math.floor(Math.random() * 20) + 1;
+    const y = Math.floor(Math.random() * 20) + 1;
+    if (zmija.some(segment => segment.x === x && segment.y === y)) {
+        return generisiHranu();
     }
-    return{x,y};
+    return { x, y };
 }
 
-//Moving the snake
-function moveSnake(){
-    const head={...snake[0]};
-    switch(direction){
-        case'right':
-            head.x++;
-            break;
-        case'left':
-            head.x--;
-            break;
-        case'up':
-            head.y--;
-            break;
-        case'down':
-            head.y++;
-            break;
+function kretanjeZmije() {
+    //plitka kopija
+    const glava = { ...zmija[0] };
+    switch (smer) {
+        case 'right': glava.x++; break;
+        case 'left': glava.x--; break;
+        case 'up': glava.y--; break;
+        case 'down': glava.y++; break;
     }
-    snake.unshift(head);
-    if(head.x==food.x && head.y==food.y){
+    zmija.unshift(glava);
+    if (glava.x == hrana.x && glava.y == hrana.y) {
         updateScore();
-        food=generateFood();
-        decreaseSpeed();
-        clearInterval(gameInterval);
-        gameInterval=setInterval(()=>{
-            moveSnake();
-            checkCollision();
-            draw();
-        },gameSpeed);
+        hrana = generisiHranu();
+        SmanjiBrzinu();
+        clearInterval(intervalIgre);
+        intervalIgre = setInterval(() => {
+            kretanjeZmije();
+            daLiDodiruje();
+            Nacrtaj();
+        }, brzina);
     }
-    else snake.pop();
-
+    else zmija.pop();
 }
 
-//start game
-function startGame(){
-    gameStarted=true;
-    instructions.style.display='none';
-    gameInterval=setInterval(()=>{
-        moveSnake();
-        checkCollision();
-        draw();
-    },gameSpeed)
+function kreniIgru() {
+    igraPocela = true;
+    instrukcija.style.display = 'none';
+    intervalIgre = setInterval(() => {
+        kretanjeZmije();
+        daLiDodiruje();
+        Nacrtaj();
+    }, brzina);
 }
 
-//keypress event listener
-function handleKeyPress(event){
-    if(((!gameStarted && event.code==='Space')||
-    (!gameStarted && event.key===' ') ) && gameEnded===false) {startGame();}
-    else if(((!gameStarted && event.code==='Space')||
-    (!gameStarted && event.key===' ') ) && gameEnded===true){
-        snake=[{x:10,y:10}];
-        food= generateFood();
-        direction='right';
-        gameSpeed=200;
-        gameEnded=false;
-        startGame();
+function handleKeyPress(event) {
+    if (((!igraPocela && event.code === 'Space') || (!igraPocela && event.key === ' ')) && igraZavrsena === false) { 
+        kreniIgru(); 
     }
-    
-    else{
-        switch(event.key){
-            case'ArrowUp':
-            if(direction!=='down')
-            direction='up';
-            break;
-            case'ArrowDown':
-            if(direction!=='up')
-            direction='down';
-            break;
-            case'ArrowLeft':
-            if(direction!=='right')
-            direction='left';
-            break;
-            case'ArrowRight':
-            if(direction!=='left')
-            direction='right';
-            break;
+    else if (((!igraPocela && event.code === 'Space') || (!igraPocela && event.key === ' ')) && igraZavrsena === true) {
+        zmija = [{ x: 10, y: 10 }];
+        hrana = generisiHranu();
+        smer = 'right';
+        brzina = 200;
+        igraZavrsena = false;
+        updateScore();
+        kreniIgru();
+    }
+    else {
+        switch (event.key) {
+            case 'ArrowUp': if (smer !== 'down') smer = 'up'; break;
+            case 'ArrowDown': if (smer !== 'up') smer = 'down'; break;
+            case 'ArrowLeft': if (smer !== 'right') smer = 'left'; break;
+            case 'ArrowRight': if (smer !== 'left') smer = 'right'; break;
         }
     }
 }
-document.addEventListener('keydown',handleKeyPress);
+document.addEventListener('keydown', handleKeyPress);
 
-function decreaseSpeed(){
-    console.log(gameSpeed);
-    if(gameSpeed>150){
-        gameSpeed-=5;
-    }
-    else if (gameSpeed>100){
-        gameSpeed-=3;
-    }
-    else if (gameSpeed>50){
-        gameSpeed-=2;
-    }
-    else if (gameSpeed>25){
-        gameSpeed-=1;
-    }
+function SmanjiBrzinu() {
+    if (brzina > 150) { brzina -= 5; }
+    else if (brzina > 100) { brzina -= 3; }
+    else if (brzina > 50) { brzina -= 2; }
+    else if (brzina > 25) { brzina -= 1; }
 }
 
-function checkCollision(){
-    const head=snake[0];
+function daLiDodiruje() {
+    const glava = zmija[0];
 
-    if(head.x<1 || head.x>20||head.y<1||head.y>20){
-        endGame();
+    if (glava.x < 1 || glava.x > 20 || glava.y < 1 || glava.y > 20) {
+        KrajIgre();
     }
-    for(let i=1;i<snake.length;i++){
-        if(head.x==snake[i].x&&head.y==snake[i].y){
-            endGame();
+    for (let i = 1; i < zmija.length; i++) {
+        if (glava.x == zmija[i].x && glava.y == zmija[i].y) {
+            KrajIgre();
         }
     }
 }
 
-function endGame(){
+function KrajIgre() {
     updateHighScore();
-    clearInterval(gameInterval);
-    gameStarted=false;
-    instructions.textContent='Game Over! Press Space to restart.';
-    instructions.style.display='block';
-    gameEnded=true;
+    clearInterval(intervalIgre);
+    igraPocela = false;
+    instrukcija.textContent = 'Game Over! Press Space to restart.';
+    instrukcija.style.display = 'block';
+    igraZavrsena = true;
 }
 
-function updateScore(){
-    const currentScore=snake.length-1;
-    score.textContent=currentScore.toString().padStart(3,'0');
+function updateScore() {
+    const currentScore = zmija.length - 1;
+    score.textContent = currentScore.toString().padStart(3, '0');
 }
 
-function updateHighScore(){
-    const currentScore=snake.length-1;
-    const highScoreValue=parseInt(highscore.textContent);
-    if(currentScore>highScoreValue){
-        highscore.textContent=currentScore.toString().padStart(3,'0');
+function updateHighScore() {
+    const currentScore = zmija.length - 1;
+    const highScoreValue = parseInt(highscore.textContent) || 0; 
+    if (currentScore > highScoreValue) {
+        highscore.textContent = currentScore.toString().padStart(3, '0');
     }
 }
