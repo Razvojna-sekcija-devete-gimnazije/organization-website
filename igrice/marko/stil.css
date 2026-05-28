@@ -62,9 +62,10 @@ body,.snake{
     background-color:#c4cfa3;
 }
 .snake{
-    border: #5a5a5a 1px dotted
+    background-color:#abb788;
+    border: white 1px dotted
 }
 .food{
-    background-color:#dedede;
+    background-color:#f80a0a;
     border: #999 5px solid;
 }
