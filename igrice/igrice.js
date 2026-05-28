@@ -2,7 +2,8 @@ const games = [
 /*
     {
         title: "Snake",
-        folder: "snake"
+        folder: "snake",
+        name: "snake"
     }
 */
 
