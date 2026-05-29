@@ -6,6 +6,9 @@
         background-position:70000%;
     }
 }
+body{
+    overflow: hidden;
+}
 #pustinja{
     position:absolute;
     background-image: url('zemlja.png');
@@ -20,5 +23,28 @@
     width: 90px;
     height: 90px;
     bottom: 0;
-    left:20px;
+}
+.kaktus{
+    position:absolute;
+    background-image: url('kaktus.png');
+    width: 50px;
+    height: 95px;
+    bottom: 0;
+}
+#kraj{
+    font-size: 50px;
+    color: red;
+    position:fixed;
+    top:5px;
+}
+#igrajPonovo{
+    position: fixed;
+    top: 110px;
+    font-size: 20px;
+    padding: 7px 15px;
+}
+#skor{
+    position: fixed;
+    top: -31px;
+    font-size: 40px;
 }
