@@ -3,23 +3,6 @@ const c = canvas1.getContext('2d');
 canvas1.height = window.innerHeight/3;
 canvas1.width = window.innerWidth;
 
-c.strokeStyle = 'black';
-c.lineWidth = 2;
-
-c.beginPath();
-c.moveTo(100, 20);
-c.lineTo(100, 200);
-
-c.moveTo(100, 20);
-c.lineTo(200, 20);
-
-c.moveTo(200, 20);
-c.lineTo(200, 50);
-
-c.moveTo(80, 200);
-c.lineTo(120, 200);
-c.stroke();
-
 const reci = ["компјутер","телефон","гитара","игрица","чичаглиша","столица","књига","слика","апарат","постер","фиока","планина","лишај","авокадо","путовање","авион", 
 	"поручити", "атрактивност", "сазвати", "воће", "топалски", "централан", "запрежан", "неименован", "схватити", "ротирати",
 	"принијети", "заслужити", "ножица", "атентаторски", "морати", "одрезан", "заглавље", "двобојан", "враголаст", "космат",
@@ -180,54 +163,12 @@ const reci = ["компјутер","телефон","гитара","игрица
 	"нередован", "ној", "обданиште", "утрчати", "њихање", "хохштаплерски", "неукротљив", "откован", "безопасан", "запаљив",
 	"породичан", "забављање", "цементан", "појачавати", "растурен", "сантиметарски", "звонарев", "усправљен", "рецепција", "буртон"
 ];
-const rec = reci[Math.floor(Math.random() * reci.length)];
-c.font = "40px Arial";
-c.fillText("_ ".repeat(rec.length),200,200);
-let greske = 0;
-let pogodjeno = 0;
-let gubi = false;
-let pobedjuje = false;
 
-c.font = "30px Arial";
-let slovaD = "абвгдђежзиијклљмнњопрстћуфхцчџш";
-for(let slovo of slovaD){
-	let dugme = document.getElementById(slovo);
-	dugme.addEventListener("click", function(event){
-		if(gubi || pobedjuje) return;
-		if (dugme.classList.contains("clicked")) return;
-
-		dugme.classList.add("clicked");
-
-		if(!rec.includes(slovo)){
-			greske++;
-			DeoTela(greske);
-			dugme.classList.add("pogresno");
-		}
-		else{
-			for (let j = 0; j < rec.length; j++) {
-				if (rec[j] == slovo) {
-					c.fillText(slovo.toUpperCase(),200+33.4*j,200);
-					pogodjeno++;
-					dugme.classList.add("pogodjeno");
-				}	
-			}
-		}
-		if(greske==6){
-			c.font = "bold 20px Arial";
-			c.fillText("реч је била: " + rec.toUpperCase(),300,150);
-			c.fillStyle = 'red';
-			c.font = "130px Arial";
-			c.fillText("Упс, изгубио си!",300,120);
-			gubi =true;
-		}
-		if(pogodjeno==rec.length){
-			c.fillStyle = 'green';
-			c.font = "130px Arial";
-			c.fillText("Свака част!",300,120);
-			pobedjuje = true;
-		}
-	});
-}
+Igraj(reci);
+let dugme = document.getElementById('reset');
+dugme.addEventListener("click", function(event){
+	Igraj(reci);
+});
 
 function DeoTela(i){
 	switch(i){
@@ -262,4 +203,80 @@ function DeoTela(i){
 			c.stroke();
 			break;
 	}
+}
+
+function Igraj(reci){
+	let slovaD = "абвгдђежзиијклљмнњопрстћуфхцчџш";
+	for(let slovo of slovaD){
+    	let dugme = document.getElementById(slovo);
+    	dugme.classList.remove("clicked", "pogresno", "pogodjeno");
+	}
+
+	c.clearRect(0, 0, canvas1.width, canvas1.height);
+	c.strokeStyle = 'black';
+	c.lineWidth = 2;
+
+	c.beginPath();
+	c.moveTo(100, 20);
+	c.lineTo(100, 200);
+
+	c.moveTo(100, 20);
+	c.lineTo(200, 20);
+
+	c.moveTo(200, 20);
+	c.lineTo(200, 50);
+
+	c.moveTo(80, 200);
+	c.lineTo(120, 200);
+	c.stroke();
+
+	const rec = reci[Math.floor(Math.random() * reci.length)];
+	c.font = "40px Arial";
+	c.fillStyle = 'black';
+	c.fillText("_ ".repeat(rec.length),200,200);
+	let greske = 0;
+	let pogodjeno = 0;
+	let gubi = false;
+	let pobedjuje = false;
+
+	c.font = "30px Arial";
+	for(let slovo of slovaD){
+		let dugme = document.getElementById(slovo);
+		dugme.addEventListener("click", function(event){
+			if(gubi || pobedjuje) return;
+			if (dugme.classList.contains("clicked")) return;
+
+			dugme.classList.add("clicked");
+
+			if(!rec.includes(slovo)){
+				greske++;
+				DeoTela(greske);
+				dugme.classList.add("pogresno");
+			}
+			else{
+				for (let j = 0; j < rec.length; j++) {
+					if (rec[j] == slovo) {
+						c.fillText(slovo.toUpperCase(),200+33.4*j,200);
+						pogodjeno++;
+						dugme.classList.add("pogodjeno");
+					}	
+				}
+			}
+			if(greske==6){
+				c.font = "bold 20px Arial";
+				c.fillText("реч је била: " + rec.toUpperCase(),300,150);
+				c.fillStyle = 'red';
+				c.font = "130px Arial";
+				c.fillText("Упс, изгубио си!",300,120);
+				gubi =true;
+			}
+			if(pogodjeno==rec.length){
+				c.fillStyle = 'green';
+				c.font = "130px Arial";
+				c.fillText("Свака част!",300,120);
+				pobedjuje = true;
+			}
+		});
+	}
+
 }
